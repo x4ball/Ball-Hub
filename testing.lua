@@ -23,7 +23,16 @@ Window:EditOpenButton({
 })
 
 local Tab = Window:Tab({
-    Title = "Tab Title",
+    Title = "Main",
     Icon = "bird",
     Locked = false,
+})
+
+local Button = Tab:Button({
+    Title = "Button",
+    Desc = "Test Button",
+    Locked = false,
+    Callback = function()
+        print("clicked")
+    end
 })
