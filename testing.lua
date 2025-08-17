@@ -330,4 +330,6 @@ local JobButton = JobTab:Button({
     Desc = "Dasar penganguran ga guna",
     Locked = false,
     Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Unemployee")
+end
+})
 })
