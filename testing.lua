@@ -248,7 +248,7 @@ DealerSection:Dropdown({
 })
 
 -- 🔹 JOB APPLICATION TAB
-local Job = Window:Tab({
+local JobTab = Window:Tab({
     Title = "Job Application",
     Icon = "bird",
     Locked = false,
