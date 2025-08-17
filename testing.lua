@@ -28,6 +28,12 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+Tab:Section({
+    Title = "Dealership JKT",
+    TextXAlignment = "Left",
+    TextSize = 17,
+})
+
 local Places = {
     ["Category A"] = Vector3.new(2827.5, 29, 100),
     ["Category B"] = Vector3.new(100, 10, 50),
