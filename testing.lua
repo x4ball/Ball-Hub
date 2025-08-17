@@ -1,6 +1,5 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-
-local Window = WindUI:CreateWindow({
+local wd = WindUI:CreateWindow({
     Title = "Ball Hub",
     Icon = "door-open",
     Author = "By - @X4ball",
@@ -8,36 +7,35 @@ local Window = WindUI:CreateWindow({
     Size = UDim2.fromOffset(600, 460),
     Theme = "Dark",
 })
-Window:Tag({
+wd:Tag({
     Title = "Working",
     Color = Color3.fromHex("#30ff6a")
 })
-Window:Tag({
+wd:Tag({
     Title = "Beta Version",
     Color = Color3.fromHex("#30ff6a")
 })
-
 -- 🔹 HOME TAB
-local Home = Window:Tab({
+local hm = wd:Tab({
     Title = "Home",
     Icon = "house",
 })
 
-local HomeSection = Home:Section({
+local hs = hm:Section({
     Title = "Profile"
 })
 
 local player = game.Players.LocalPlayer
 local membership = (player.MembershipType == Enum.MembershipType.None and "Free") or "Premium"
 
-HomeSection:Paragraph({
+hs:Paragraph({
     Title = player.Name,
     Desc = "Status: " .. membership,
     Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=420&height=420&format=png",
     ImageSize = 80,
 })
 
-HomeSection:Button({
+hs:Button({
     Title = "Join Discord",
     Desc = "Klik buat join server",
     Callback = function()
@@ -52,29 +50,28 @@ HomeSection:Button({
 })
 
 -- 🔹 CHANGELOG (jadi satu di HOME)
-local ChangelogSection = Home:Section({
+local cln = hm:Section({
     Title = "Changelog v1.6.4"
 })
 
-ChangelogSection:Paragraph({
+cln:Paragraph({
     Title = "Perubahan",
     Desc = "- Fix bug teleport\n- Tambah Dealer Toyota\n- UI Home Profile baru",
     Color = "Green",
 })
 -- 🔹 PLAYER TAB
-local PlayerTab = Window:Tab({
+local pb = wd:Tab({
     Title = "Player",
     Icon = "player",
 })
 
-local PlayerSection = PlayerTab:Section({ 
+local psn = pb:Section({ 
     Title = "Feature",
     TextXAlignment = "Left",
     TextSize = 20, 
 })
-
 -- 🔹 DEALERSHIP TAB
-local DealerTab = Window:Tab({
+local DealerTab = wd:Tab({
     Title = "Dealership",
     Icon = "car",
 })
@@ -246,19 +243,17 @@ DealerSection:Dropdown({
         end
     end
 })
-
 -- 🔹 JOB APPLICATION TAB
-local JobTab = Window:Tab({
+local jp = wd:Tab({
     Title = "Job Application",
-    Icon = "bird",
-    Locked = false,
+    Icon = "job",
 })
 
-local JobTeleport = JobTab:Section({ 
-    Title = "Teleport to job"
+local jpe = jp:Section({
+    Title = "Job Place in Jakarta"
 })
 
-JobTeleport:Button({
+jpe:Button({
     Title = "Teleport To Office",
     Desc = "Teleport to office job buliding.",
     Locked = false,
@@ -280,11 +275,11 @@ TrucWindUI:Notify({
     end
 })
 
-local JobSection = JobTab:Section({
+local jtn = jp:Section({
     Title = "Get A Job"
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Office",
     Desc = "Get A Office Job",
     Locked = false,
@@ -292,7 +287,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Office")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Truck",
     Desc = "Get A Truck Drivers Job",
     Locked = false,
@@ -300,7 +295,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Truck")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Gowes",
     Desc = "Get A Gojek Driver Job",
     Locked = false,
@@ -308,7 +303,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Gowes")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Taxi",
     Desc = "Get A Taxi Driver Job",
     Locked = false,
@@ -316,7 +311,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Taxi")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Travel",
     Desc = "Get A Travel Driver Job",
     Locked = false,
@@ -324,7 +319,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Travel")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Corurier Si Lambat",
     Desc = "Get A Corurier Job",
     Locked = false,
@@ -332,7 +327,7 @@ JobSection:Button({
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("SiLambat")
 })
 
-JobSection:Button({
+jtn:Button({
     Title = "Pengangguran",
     Desc = "Dasar penganguran ga guna",
     Locked = false,
