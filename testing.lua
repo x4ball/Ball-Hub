@@ -247,34 +247,3 @@ DealerSection:Dropdown({
     end
 })
 
--- 🔹 JOB APPLICATION TAB
-local JobTeleport = job:Tab({
-    Title = "Job Application",
-    Icon = "job",
-})
-
-local JobTeleport = Job:Section({
-    Title = "Job Place in Jakarta"
-})
-
-JobTeleport:Button({
-    Title = "Teleport To Office",
-    Desc = "Teleport to office job buliding.",
-    Locked = false,
-    Callback = function()
-        WindUI:Notify({
-                Title = "Teleport",
-                Content = "Teleport To Office place",
-                Duration = 2,
-                Icon = "loader",
-            })
-        task.wait(1)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
-TrucWindUI:Notify({
-                Title = "Sukses",
-                Content = "Berhasil teleport ke ",
-                Duration = 3,
-                Icon = "check",
-        })
-    end
-})
