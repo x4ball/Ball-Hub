@@ -22,11 +22,12 @@ Window:EditOpenButton({
     Draggable = true,
 })
 
--- 5. Buat Section & Fitur
-local Main = Window:Section({
-    Title = "Main",
-    Icon = "home",
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
 })
+
 local Tab = Player({
     Title = "Tab Title",
     Icon = "bird",
