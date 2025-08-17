@@ -248,7 +248,7 @@ DealerSection:Dropdown({
 })
 
 -- 🔹 JOB APPLICATION TAB
-local JobTeleport = Window:Tab({
+local JobTeleport = job:Tab({
     Title = "Job Application",
     Icon = "job",
 })
