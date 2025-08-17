@@ -337,4 +337,5 @@ JobSection:Button({
     Locked = false,
     Callback = function()
         game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Unemployee")
-})
+end
+  })
