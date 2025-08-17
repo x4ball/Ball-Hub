@@ -38,6 +38,5 @@ local Button = Tab:Button({
     Content = "Notification Content example!",
     Duration = 3, -- 3 seconds
     Icon = "bird",
-})
     end
 })
