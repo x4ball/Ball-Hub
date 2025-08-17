@@ -22,12 +22,6 @@ Window:EditOpenButton({
     Draggable = true,
 })
 
-local Section = Window:Section({
-    Title = "Main",
-    Icon = "bird",
-    Opened = true,
-})
-
 local Tab = Window:Tab({
     Title = "Tab Title",
     Icon = "bird",
