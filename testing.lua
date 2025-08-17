@@ -1,51 +1,36 @@
+-- 1. Muat Wind UI
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
+-- 2. Buat Window (jendela utama)
 local Window = WindUI:CreateWindow({
     Title = "My Hub",
-    Author = "ftgs",
+    Icon = "door-open",
+    Author = "by ftgs",
+    Folder = "MySuperHub",
+    Size = UDim2.fromOffset(600, 460),
     Theme = "Dark",
-    Size = UDim2.fromOffset(600, 500),
-    SideBarWidth = 180,
 })
 
+-- 3. ✅ TARUH DI SINI: Topbar Button
+Window:CreateTopbarButton("MyCustomButton1", "bird", function()
+    print("clicked!")
+end, 990)
+
+-- 4. (Opsional) Edit tombol buka GUI
 Window:EditOpenButton({
     Title = "Open Hub",
     Draggable = true,
-    Color = ColorSequence.new(Color3.fromHex("4A00E0"), Color3.fromHex("8E2DE2"))
 })
 
--- 🔹 Section 1: Movement
-local Movement = Window:Section({
-    Title = "Movement",
-    Icon = "run",
-    Opened = true
+-- 5. Buat Section & Fitur
+local Main = Window:Section({
+    Title = "Main",
+    Icon = "home",
 })
 
-Movement:Button({
+Main:Button({
     Title = "Speed 32",
     Callback = function()
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 32
-    end
-})
-
-Movement:Toggle({
-    Title = "Infinite Jump",
-    Callback = function(state)
-        if state then
-            -- aktifkan
-        end
-    end
-})
-
--- 🔹 Section 2: Teleport
-local Teleport = Window:Section({
-    Title = "Teleport",
-    Icon = "map-marker"
-})
-
-Teleport:Button({
-    Title = "To Spawn",
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 5, 0)
     end
 })
