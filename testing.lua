@@ -23,12 +23,12 @@ Window:EditOpenButton({
 })
 
 local Section = Window:Section({
-    Title = "Section for the tabs",
+    Title = "Main",
     Icon = "bird",
     Opened = true,
 })
 
-local Tab = Player({
+local Tab = Window:Tab({
     Title = "Tab Title",
     Icon = "bird",
     Locked = false,
