@@ -248,16 +248,16 @@ DealerSection:Dropdown({
 })
 
 -- 🔹 JOB APPLICATION TAB
-local Job = Window:Tab({
+local JobTeleport = Window:Tab({
     Title = "Job Application",
     Icon = "job",
 })
 
-local JobSection = Job:Section({
+local JobTeleport = Job:Section({
     Title = "Job Place in Jakarta"
 })
 
-JobSection:Button({
+JobTeleport:Button({
     Title = "Teleport To Office",
     Desc = "Teleport to office job buliding.",
     Locked = false,
@@ -279,57 +279,62 @@ TrucWindUI:Notify({
     end
 })
 
-local GetAJob = Job:Section({
+local JobSection = Job:Section({
     Title = "Get A Job"
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Office",
     Desc = "Get A Office Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Office")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Office")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Truck",
     Desc = "Get A Truck Drivers Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Truck")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Truck")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Gowes",
     Desc = "Get A Gojek Driver Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Gowes")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Gowes")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Taxi",
     Desc = "Get A Taxi Driver Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Taxi")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Taxi")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Travel",
     Desc = "Get A Travel Driver Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Travel")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Travel")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Corurier Si Lambat",
     Desc = "Get A Corurier Job",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("SiLambat")
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("SiLambat")
 })
 
-local JobButton = JobTab:Button({
+JobSection:Button({
     Title = "Pengangguran",
     Desc = "Dasar penganguran ga guna",
     Locked = false,
-    Callback = function() game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Unemployee")
-end
-})
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Unemployee")
 })
