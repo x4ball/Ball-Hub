@@ -1,7 +1,6 @@
--- Muat WindUI
+-- Buat Window
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
--- Buat Window utama
 local Window = WindUI:CreateWindow({
     Title = "Ball Hub",
     Icon = "door-open",
@@ -22,22 +21,26 @@ local HomeTab = Window:Tab({
     Icon = "home",
 })
 
--- Profile Section
+-- === SECTION: PROFILE ===
+local ProfileSection = HomeTab:Section({
+    Title = "Profile",
+})
 local player = game.Players.LocalPlayer
 local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId="..player.UserId.."&width=420&height=420&format=png"
 
-HomeTab:Section({ Title = "Profile" })
-HomeTab:Paragraph({
+ProfileSection:Paragraph({
     Title = player.Name,
     Desc = "Welcome to Ball Hub v1.6.4 🎉",
-    Color = "Blue",
     Thumbnail = avatarUrl,
     ThumbnailSize = 80,
+    Color = "Blue",
 })
 
--- Links Section
-HomeTab:Section({ Title = "Links & Social" })
-HomeTab:Paragraph({
+-- === SECTION: LINKS ===
+local LinkSection = HomeTab:Section({
+    Title = "Links & Social",
+})
+LinkSection:Paragraph({
     Title = "Community",
     Desc = "Connect with us!",
     Color = "Green",
@@ -55,24 +58,14 @@ HomeTab:Paragraph({
                 })
             end,
         },
-        {
-            Icon = "star",
-            Title = "Credits",
-            Callback = function()
-                WindUI:Notify({
-                    Title = "Credits",
-                    Content = "Made by @X4ball ✨",
-                    Duration = 3,
-                    Icon = "heart",
-                })
-            end,
-        },
     }
 })
 
--- Changelog Section
-HomeTab:Section({ Title = "Changelog" })
-HomeTab:Paragraph({
+-- === SECTION: CHANGELOG ===
+local ChangeSection = HomeTab:Section({
+    Title = "Changelog",
+})
+ChangeSection:Paragraph({
     Title = "Update v1.6.4",
     Desc = [[
 - 🚀 Added new Teleport Dealers
@@ -90,7 +83,9 @@ local DealerTab = Window:Tab({
     Icon = "car",
 })
 
-DealerTab:Section({ Title = "Dealer Jakarta" })
+local DealerSection = DealerTab:Section({
+    Title = "Dealer Jakarta",
+})
 
 local Places = {
     ["Dealer Mobil Bekas JKT"] = Vector3.new(0, 5, 0),
@@ -103,13 +98,12 @@ local NotPlaces = {
     ["Dealer Retro JKT"] = true,
 }
 
-local Dropdown = DealerTab:Dropdown({
+DealerSection:Dropdown({
     Title = "Choose A Dealer",
     Values = { "Dealer Mobil Bekas JKT", "Dealer Mitshubisi JKT", "Dealer Mercedes JKT", "Dealer Toyota JKT", "Dealer Retro JKT", "Dealer 77 JKT" },
     Value = "Choose",
     Callback = function(option)
         if Places[option] then
-            -- notif sebelum teleport
             WindUI:Notify({
                 Title = "Teleport",
                 Content = "Teleporting ke " .. option .. "...",
@@ -117,9 +111,7 @@ local Dropdown = DealerTab:Dropdown({
                 Icon = "loader",
             })
             task.wait(1)
-            -- teleport
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Places[option])
-            -- notif sukses
             WindUI:Notify({
                 Title = "Teleport",
                 Content = "Success teleport to " .. option .. " ✅",
