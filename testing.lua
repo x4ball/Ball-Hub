@@ -28,34 +28,49 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
--- Bikin label judul dulu
-Tab:Label({
-    Title = "Menu Teleport",
-    Desc = "Pilih lokasi untuk teleport",
-})
+local Places = {
+    ["Category A"] = Vector3.new(2827.5, 29, 100),
+    ["Category B"] = Vector3.new(100, 10, 50),
+    ["Category C"] = Vector3.new(0, 5, 0),
+}
 
--- Baru bikin button di bawahnya
-local Button = Tab:Button({
-    Title = "Teleport ke Tempat A",
-    Desc = "Klik untuk teleport",
-    Locked = false,
-    Callback = function()
-        WindUI:Notify({
-            Title = "Teleport",
-            Content = "Teleporting...",
-            Duration = 2,
-            Icon = "loader",
-        })
+local Dropdown = Tab:Dropdown({
+    Title = "Dropdown (Multi)",
+    Values = { "Category A", "Category B", "Category C" },
+    Value = { "Category A" },
+    Multi = true,
+    AllowNone = true,
+    Callback = function(option)
+        -- option bisa table (multi) atau string (kalau Multi = false)
+        if typeof(option) == "table" then
+            for _, name in ipairs(option) do
+                local pos = Places[name]
+                if pos then
+                    -- Teleport
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
 
-        task.wait(1)
+                    -- Notif
+                    WindUI:Notify({
+                        Title = "Teleport",
+                        Content = "Sukses Teleport ke " .. name,
+                        Duration = 3,
+                        Icon = "check",
+                    })
 
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2827.50488, 29, 100)
-
-        WindUI:Notify({
-            Title = "Teleport",
-            Content = "Sukses Teleport!",
-            Duration = 3,
-            Icon = "check",
-        })
+                    task.wait(1) -- biar ada jeda kalau pilih lebih dari 1
+                end
+            end
+        else
+            local pos = Places[option]
+            if pos then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+                WindUI:Notify({
+                    Title = "Teleport",
+                    Content = "Sukses Teleport ke " .. option,
+                    Duration = 3,
+                    Icon = "check",
+                })
+            end
+        end
     end
 })
