@@ -32,7 +32,7 @@ local Button = Tab:Button({
     Title = "Button",
     Desc = "Test Button",
     Locked = false,
-    Callback = function()
+    Callback = function(Notify)
      WindUI:Notify({
     Title = "Notification Title",
     Content = "Notification Content example!",
