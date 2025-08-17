@@ -1,7 +1,7 @@
--- 1. Muat Wind UI
+-- Muat WindUI
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
--- 2. Buat Window (jendela utama)
+-- Buat Window utama
 local Window = WindUI:CreateWindow({
     Title = "Ball Hub",
     Icon = "door-open",
@@ -16,50 +16,27 @@ Window:Tag({
     Color = Color3.fromHex("#30ff6a")
 })
 
--- 3. Topbar Button
-Window:CreateTopbarButton("MyCustomButton1", "bird", function()
-    print("clicked!")
-end, 990)
-
--- 4. (Opsional) Edit tombol buka GUI
-Window:EditOpenButton({
-    Title = "Open Hub",
-    Draggable = true,
-})
-
 -- 🏠 HOME TAB
 local HomeTab = Window:Tab({
     Title = "Home",
     Icon = "home",
-    Locked = false,
 })
 
--- 👤 Profile Section
-HomeTab:Section({
-    Title = "Your Profile",
-    TextXAlignment = "Left",
-    TextSize = 18,
-})
-
+-- Profile Section
 local player = game.Players.LocalPlayer
 local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId="..player.UserId.."&width=420&height=420&format=png"
 
+HomeTab:Section({ Title = "Profile" })
 HomeTab:Paragraph({
     Title = player.Name,
     Desc = "Welcome to Ball Hub v1.6.4 🎉",
     Color = "Blue",
     Thumbnail = avatarUrl,
     ThumbnailSize = 80,
-    Locked = false,
 })
 
--- 🔗 Links Section
-HomeTab:Section({
-    Title = "Links & Social",
-    TextXAlignment = "Left",
-    TextSize = 18,
-})
-
+-- Links Section
+HomeTab:Section({ Title = "Links & Social" })
 HomeTab:Paragraph({
     Title = "Community",
     Desc = "Connect with us!",
@@ -69,7 +46,7 @@ HomeTab:Paragraph({
             Icon = "discord",
             Title = "Join Discord",
             Callback = function()
-                setclipboard("https://discord.gg/xxxxxxx") -- ganti link
+                setclipboard("https://discord.gg/xxxxxxx")
                 WindUI:Notify({
                     Title = "Discord",
                     Content = "Link Discord dicopy ke clipboard 📋",
@@ -93,13 +70,8 @@ HomeTab:Paragraph({
     }
 })
 
--- 📝 Changelog Section
-HomeTab:Section({
-    Title = "Changelog",
-    TextXAlignment = "Left",
-    TextSize = 18,
-})
-
+-- Changelog Section
+HomeTab:Section({ Title = "Changelog" })
 HomeTab:Paragraph({
     Title = "Update v1.6.4",
     Desc = [[
@@ -112,44 +84,31 @@ HomeTab:Paragraph({
     Locked = true,
 })
 
--- DEALER AND JOB SECTION
-local Section = Window:Section({
-    Title = "Teleport Dealership & Job",
-    Icon = "bird",
-    Opened = true,
-})
-
-local Tab = Window:Tab({
+-- 🚗 DEALERSHIP TAB
+local DealerTab = Window:Tab({
     Title = "Dealership",
-    Icon = "bird",
-    Locked = false,
+    Icon = "car",
 })
 
-Tab:Section({
-    Title = "Dealership Jakarta",
-    TextXAlignment = "Left",
-    TextSize = 20,
-})
+DealerTab:Section({ Title = "Dealer Jakarta" })
 
 local Places = {
-    ["Dealer Mobil Bekas JKT"] = Vector3.new(),
+    ["Dealer Mobil Bekas JKT"] = Vector3.new(0, 5, 0),
     ["Dealer Mitshubisi JKT"] = Vector3.new(2827.5, 29, 100),
     ["Dealer Mercedes JKT"] = Vector3.new(100, 10, 50),
-    ["Dealer Toyota JKT"] = Vector3.new(0, 5, 0),
-    ["Dealer Bmw JKT"] = Vector3.new()
+    ["Dealer Toyota JKT"] = Vector3.new(50, 5, 50),
 }
-local notplace = {
-    ["Dealer 77 JKT"] = Vector3.new(),
-    ["Dealer Retro JKT"] = Vector3.new()
+local NotPlaces = {
+    ["Dealer 77 JKT"] = true,
+    ["Dealer Retro JKT"] = true,
 }
 
-local Dropdown = Tab:Dropdown({
+local Dropdown = DealerTab:Dropdown({
     Title = "Choose A Dealer",
     Values = { "Dealer Mobil Bekas JKT", "Dealer Mitshubisi JKT", "Dealer Mercedes JKT", "Dealer Toyota JKT", "Dealer Retro JKT", "Dealer 77 JKT" },
     Value = "Choose",
     Callback = function(option)
-        local pos = Places[option]
-        if pos then
+        if Places[option] then
             -- notif sebelum teleport
             WindUI:Notify({
                 Title = "Teleport",
@@ -157,12 +116,9 @@ local Dropdown = Tab:Dropdown({
                 Duration = 2,
                 Icon = "loader",
             })
-
             task.wait(1)
-
             -- teleport
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Places[option])
             -- notif sukses
             WindUI:Notify({
                 Title = "Teleport",
@@ -170,12 +126,12 @@ local Dropdown = Tab:Dropdown({
                 Duration = 3,
                 Icon = "check",
             })
-        else
+        elseif NotPlaces[option] then
             WindUI:Notify({
                 Title = "Can't Teleport ❌",
                 Content = option .. " not available in Jakarta",
                 Duration = 3,
-                Icon = "loader"
+                Icon = "x"
             })
         end
     end
