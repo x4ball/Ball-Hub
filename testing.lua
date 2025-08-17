@@ -22,7 +22,7 @@ local HomeSection = Home:Section({
 HomeSection:Paragraph({
     Title = "Your Avatar",
     Desc = "Ini avatar kamu",
-    Image = game.Players.LocalPlayer.UserId, -- bisa ganti jadi thumbnail avatar API
+    Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=420&height=420&format=png",
     ImageSize = 80,
 })
 
@@ -30,12 +30,12 @@ HomeSection:Button({
     Title = "Join Discord",
     Desc = "Klik buat join server",
     Callback = function()
-        setclipboard("https://discord.gg/xxxx") -- link discord
+        setclipboard("https://discord.gg/xxxx") -- ganti link discord
         WindUI:Notify({
             Title = "Discord",
-            Content = "Link discord sudah di-copy ke clipboard!",
+            Content = "Link discord sudah di-copy!",
             Duration = 3,
-            Icon = "check"
+            Icon = "check",
         })
     end
 })
@@ -86,4 +86,56 @@ DealerSection:Dropdown({
             })
         end
     end
+})
+
+-- 🔹 JOB TAB
+local JobTab = Window:Tab({
+    Title = "Job",
+    Icon = "briefcase",
+})
+
+local JobSection = JobTab:Section({
+    Title = "Pilih Pekerjaan"
+})
+
+JobSection:Button({
+    Title = "Driver",
+    Desc = "Ambil job Driver",
+    Callback = function()
+        WindUI:Notify({
+            Title = "Job",
+            Content = "Kamu mengambil pekerjaan Driver",
+            Duration = 3,
+            Icon = "check",
+        })
+    end
+})
+
+JobSection:Button({
+    Title = "Mechanic",
+    Desc = "Ambil job Mechanic",
+    Callback = function()
+        WindUI:Notify({
+            Title = "Job",
+            Content = "Kamu mengambil pekerjaan Mechanic",
+            Duration = 3,
+            Icon = "check",
+        })
+    end
+})
+
+-- 🔹 CHANGELOG TAB
+local Changelog = Window:Tab({
+    Title = "Changelog",
+    Icon = "list",
+})
+
+local ChangelogSection = Changelog:Section({
+    Title = "Update v1.6.4"
+})
+
+ChangelogSection:Paragraph({
+    Title = "Perubahan",
+    Desc = "- Fix bug teleport\n- Tambah Dealer Toyota\n- UI Home Profile baru",
+    Color = "Green",
 })
