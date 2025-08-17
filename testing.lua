@@ -248,7 +248,7 @@ DealerSection:Dropdown({
 })
 
 -- 🔹 JOB APPLICATION TAB
-local Job1 = Window:Tab({
+local Job = Window:Tab({
     Title = "Job Application",
     Icon = "bird",
     Locked = false,
@@ -280,7 +280,7 @@ TrucWindUI:Notify({
     end
 })
 
-local JobSection = AJobTab:Section({
+local JobSection = JobTab:Section({
     Title = "Get A Job"
 })
 
