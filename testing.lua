@@ -1,28 +1,89 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "Test Window",
+    Title = "Ball Hub",
+    Icon = "door-open",
+    Author = "By - @X4ball",
+    Folder = "Ball Hub",
+    Size = UDim2.fromOffset(600, 460),
     Theme = "Dark",
 })
 
+-- 🔹 HOME TAB
 local Home = Window:Tab({
     Title = "Home",
     Icon = "home",
 })
 
-local Section = Home:Section({
-    Title = "Test Section"
+local HomeSection = Home:Section({
+    Title = "Profile"
 })
 
-Section:Button({
-    Title = "Hello",
-    Desc = "Klik aku",
+HomeSection:Paragraph({
+    Title = "Your Avatar",
+    Desc = "Ini avatar kamu",
+    Image = game.Players.LocalPlayer.UserId, -- bisa ganti jadi thumbnail avatar API
+    ImageSize = 80,
+})
+
+HomeSection:Button({
+    Title = "Join Discord",
+    Desc = "Klik buat join server",
     Callback = function()
+        setclipboard("https://discord.gg/xxxx") -- link discord
         WindUI:Notify({
-            Title = "Success",
-            Content = "Tombol kepencet ✅",
+            Title = "Discord",
+            Content = "Link discord sudah di-copy ke clipboard!",
             Duration = 3,
             Icon = "check"
         })
+    end
+})
+
+-- 🔹 DEALERSHIP TAB
+local DealerTab = Window:Tab({
+    Title = "Dealership",
+    Icon = "car",
+})
+
+local DealerSection = DealerTab:Section({
+    Title = "Dealer Jakarta"
+})
+
+local Places = {
+    ["Dealer Mitshubisi JKT"] = Vector3.new(2827.5, 29, 100),
+    ["Dealer Mercedes JKT"] = Vector3.new(100, 10, 50),
+    ["Dealer Toyota JKT"] = Vector3.new(0, 5, 0),
+}
+
+DealerSection:Dropdown({
+    Title = "Pilih Dealer",
+    Values = {"Dealer Mitshubisi JKT", "Dealer Mercedes JKT", "Dealer Toyota JKT"},
+    Value = "Dealer Mitshubisi JKT",
+    Callback = function(option)
+        local pos = Places[option]
+        if pos then
+            WindUI:Notify({
+                Title = "Teleport",
+                Content = "Teleporting ke " .. option .. "...",
+                Duration = 2,
+                Icon = "loader",
+            })
+            task.wait(1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+            WindUI:Notify({
+                Title = "Sukses ✅",
+                Content = "Berhasil teleport ke " .. option,
+                Duration = 3,
+                Icon = "check",
+            })
+        else
+            WindUI:Notify({
+                Title = "Gagal ❌",
+                Content = "Lokasi dealer nggak ditemukan",
+                Duration = 3,
+                Icon = "x",
+            })
+        end
     end
 })
