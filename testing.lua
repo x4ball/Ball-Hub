@@ -28,15 +28,30 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-Main:Button({
-    Title = "Click Me!",
+local Button = Tab:Button({
+    Title = "Teleport ke Tempat A",
+    Desc = "Klik untuk teleport",
+    Locked = false,
     Callback = function()
-        -- Di sinilah kamu taruh Notify
+        -- Notif sebelum teleport
         WindUI:Notify({
-            Title = "Sukses!",
-            Content = "Fitur berhasil dijalankan!",
-            Duration = 3, -- 3 detik
-            Icon = "check", -- bisa: "bird", "cog", "warning", dll
+            Title = "Teleport",
+            Content = "Teleporting...",
+            Duration = 2,
+            Icon = "loader",
+        })
+
+        task.wait(1) -- jeda biar notif kebaca
+
+        -- Teleport
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2827.50488, 29, 100)
+
+        -- Notif setelah teleport
+        WindUI:Notify({
+            Title = "Teleport",
+            Content = "Sukses Teleport!",
+            Duration = 3,
+            Icon = "check",
         })
     end
 })
