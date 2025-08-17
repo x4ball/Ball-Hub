@@ -270,11 +270,75 @@ local JobButton = Tab:Button({
             })
         task.wait(1)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
-        WindUI:Notify({
+TrucWindUI:Notify({
                 Title = "Sukses",
                 Content = "Berhasil teleport ke ",
                 Duration = 3,
                 Icon = "check",
         })
     end
+})
+local JobSection = Job:Section({
+    Title = "Get A Job"
+})
+local JobButton = JobTab:Button({
+    Title = "Office",
+    Desc = "Get A Office Job",
+    Locked = false,
+    Callback = function()
+        game:GetService("ReplicatedStorage").NetworkContainer.RemoteEvents.Job:FireServer("Office")
+        Truck,Taxi,SiLambat,Gowes,Travel Unemployee
+})
+
+        local JobSection = Job:Section({
+            Title = "Get A Job"
+})
+        -- 🔧 Fungsi ambil job name
+local function getJobName()
+    local billboard = workspace:FindFirstChild("Billboard")
+    if not billboard then return "Not Found" end
+
+    local jobSelection = billboard:FindFirstChild("JobSelection")
+    if not jobSelection then return "Not Found" end
+
+    local playerBillboard = jobSelection:FindFirstChild("PlayerBillboard")
+    if not playerBillboard then return "Not Found" end
+
+    local frame = playerBillboard:FindFirstChild("Frame")
+    if not frame then return "Not Found" end
+
+    local jobNameLabel = frame:FindFirstChild("JobName")
+    if not jobNameLabel then return "Not Found" end
+
+    return jobNameLabel.Text
+end
+}
+-- 📄 Buat Paragraph
+local Paragraph = Tab:Paragraph({
+    Title = "Job Status",
+    Desc = "Loading job...",
+    Color = "White", -- Bisa: "Red", "Green", "Blue", "White", dll
+    Image = "", -- Biarkan kosong atau tambah icon
+    ImageSize = 30,
+    Thumbnail = "", -- Misalnya avatar pemain nanti
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "refresh",
+            Title = "Refresh",
+            Callback = function()
+                local job = getJobName()
+                Paragraph:SetDesc(job) -- Update deskripsi secara live
+            end
+        }
+    }
+})
+
+-- ⚡ Update job pertama kali
+spawn(function()
+    wait(0.5)
+    local job = getJobName()
+    Paragraph:SetDesc(job)
+end)
 })
