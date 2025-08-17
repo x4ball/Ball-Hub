@@ -1,10 +1,12 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
 local Window = WindUI:CreateWindow({
-    Title = "Ball Hub ",
+    Title = "My Super Hub ",
     Icon = "door-open",
-    Author = "By X4Ball",
+    Author = "by .ftgs and .ftgs",
     Folder = "MySuperHub",
     
+    -- ↓ This all is Optional. You can remove it.
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
     Theme = "Dark",
@@ -13,29 +15,48 @@ local Window = WindUI:CreateWindow({
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
-   
---minisize tombol 
-    Window:EditOpenButton({
-    Title = "Open Example UI",
-    Icon = "monitor",
-    CornerRadius = UDim.new(0,16),
-    StrokeThickness = 2,
-    Color = ColorSequence.new( -- gradient
-        Color3.fromHex("FF0F7B"), 
-        Color3.fromHex("F89B29")
-    ),
-    OnlyMobile = false,
-    Enabled = true,
-    Draggable = true,
-
---header
-Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
-
+    
+    -- ↓ Optional. You can remove it.
+    --[[ You can set 'rbxassetid://' or video to Background.
+        'rbxassetid://':
+            Background = "rbxassetid://", -- rbxassetid
+        Video:
+            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
+    --]]
+    
+    -- ↓ Optional. You can remove it.
     User = {
         Enabled = true,
-        Anonymous = false,
+        Anonymous = true,
         Callback = function()
             print("clicked")
         end,
     },
+    
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "1234", "5678" },
+        
+        Note = "Example Key System.",
+        
+        -- ↓ Optional. You can remove it.
+        Thumbnail = {
+            Image = "rbxassetid://",
+            Title = "Thumbnail",
+        },
+        
+        -- ↓ Optional. You can remove it.
+        URL = "YOUR LINK TO GET KEY (Discord, Linkvertise, Pastebin, etc.)",
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
 })
+
+--                        ↓ Special name     ↓ Icon     ↓ Callback                         ↓ Order
+Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
