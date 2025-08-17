@@ -19,10 +19,13 @@ local HomeSection = Home:Section({
     Title = "Profile"
 })
 
+local player = game.Players.LocalPlayer
+local membership = (player.MembershipType == Enum.MembershipType.None and "Free") or "Premium"
+
 HomeSection:Paragraph({
-    Title = "Your Avatar",
-    Desc = "Ini avatar kamu",
-    Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=420&height=420&format=png",
+    Title = player.Name,
+    Desc = "Status: " .. membership,
+    Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=420&height=420&format=png",
     ImageSize = 80,
 })
 
@@ -38,6 +41,17 @@ HomeSection:Button({
             Icon = "check",
         })
     end
+})
+
+-- 🔹 CHANGELOG (jadi satu di HOME)
+local ChangelogSection = Home:Section({
+    Title = "Changelog v1.6.4"
+})
+
+ChangelogSection:Paragraph({
+    Title = "Perubahan",
+    Desc = "- Fix bug teleport\n- Tambah Dealer Toyota\n- UI Home Profile baru",
+    Color = "Green",
 })
 
 -- 🔹 DEALERSHIP TAB
@@ -70,7 +84,7 @@ DealerSection:Dropdown({
                 Icon = "loader",
             })
             task.wait(1)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
             WindUI:Notify({
                 Title = "Sukses ✅",
                 Content = "Berhasil teleport ke " .. option,
@@ -86,56 +100,4 @@ DealerSection:Dropdown({
             })
         end
     end
-})
-
--- 🔹 JOB TAB
-local JobTab = Window:Tab({
-    Title = "Job",
-    Icon = "briefcase",
-})
-
-local JobSection = JobTab:Section({
-    Title = "Pilih Pekerjaan"
-})
-
-JobSection:Button({
-    Title = "Driver",
-    Desc = "Ambil job Driver",
-    Callback = function()
-        WindUI:Notify({
-            Title = "Job",
-            Content = "Kamu mengambil pekerjaan Driver",
-            Duration = 3,
-            Icon = "check",
-        })
-    end
-})
-
-JobSection:Button({
-    Title = "Mechanic",
-    Desc = "Ambil job Mechanic",
-    Callback = function()
-        WindUI:Notify({
-            Title = "Job",
-            Content = "Kamu mengambil pekerjaan Mechanic",
-            Duration = 3,
-            Icon = "check",
-        })
-    end
-})
-
--- 🔹 CHANGELOG TAB
-local Changelog = Window:Tab({
-    Title = "Changelog",
-    Icon = "list",
-})
-
-local ChangelogSection = Changelog:Section({
-    Title = "Update v1.6.4"
-})
-
-ChangelogSection:Paragraph({
-    Title = "Perubahan",
-    Desc = "- Fix bug teleport\n- Tambah Dealer Toyota\n- UI Home Profile baru",
-    Color = "Green",
 })
