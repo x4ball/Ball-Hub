@@ -19,3 +19,14 @@ local Window = WindUI:CreateWindow({
     ScrollBarEnabled = false,
     },
 })
+local Section = Window:Section({
+    Title = "Section for the tabs",
+    Icon = "bird",
+    Opened = true,
+
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
+})
+})
