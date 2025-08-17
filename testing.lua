@@ -33,6 +33,11 @@ local Button = Tab:Button({
     Desc = "Test Button",
     Locked = false,
     Callback = function()
-        print("clicked")
+     WindUI:Notify({
+    Title = "Notification Title",
+    Content = "Notification Content example!",
+    Duration = 3, -- 3 seconds
+    Icon = "bird",
+})
     end
 })
