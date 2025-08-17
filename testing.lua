@@ -27,10 +27,8 @@ local Main = Window:Section({
     Title = "Main",
     Icon = "home",
 })
-
-Main:Button({
-    Title = "Speed 32",
-    Callback = function()
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 32
-    end
+local Tab = Player({
+    Title = "Tab Title",
+    Icon = "bird",
+    Locked = false,
 })
