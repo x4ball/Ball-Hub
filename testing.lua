@@ -312,9 +312,11 @@ local function getJobName()
 
     return jobNameLabel.Text
 end
+  
 }
+
 -- 📄 Buat Paragraph
-local Paragraph = Tab:Paragraph({
+local JobParagraph = JobTab:Paragraph({
     Title = "Job Status",
     Desc = "Loading job...",
     Color = "White", -- Bisa: "Red", "Green", "Blue", "White", dll
