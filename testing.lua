@@ -1,44 +1,41 @@
--- Load WindUI Library
-local success, WindUI = pcall(function()
-    return loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
-end)
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "Ball Hub ",
+    Icon = "door-open",
+    Author = "By X4Ball",
+    Folder = "MySuperHub",
+    
+    Size = UDim2.fromOffset(580, 460),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
+   
+--minisize tombol 
+    Window:EditOpenButton({
+    Title = "Open Example UI",
+    Icon = "monitor",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new( -- gradient
+        Color3.fromHex("FF0F7B"), 
+        Color3.fromHex("F89B29")
+    ),
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
 
-if not success then
-    warn("Gagal memuat WindUI. Periksa koneksi atau URL.")
-    return
-end
+--header
+Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
 
--- Buat window utama
-local window = WindUI.new("Simple WindUI Script")
-
--- Buat tab
-local tab = window:Tab("Main")
-
--- Tambahkan tombol
-tab:Button("Klik Saya!", function()
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "WindUI",
-        Text = "Tombol berhasil diklik!",
-        Duration = 5
-    })
-end)
-
--- Tambahkan toggle
-tab:Toggle("Auto-Farm", false, function(state)
-    if state then
-        print("Auto-Farm: Aktif")
-    else
-        print("Auto-Farm: Mati")
-    end
-end)
-
--- Tambahkan slider
-tab:Slider("WalkSpeed", 16, 50, 16, function(value)
-    local character = game.Players.LocalPlayer.Character
-    if character and character:FindFirstChild("Humanoid") then
-        character.Humanoid.WalkSpeed = value
-    end
-end)
-
--- Tambahkan label info
-tab:Label("Script ini kompatibel dengan semua executor.")
+    User = {
+        Enabled = true,
+        Anonymous = false,
+        Callback = function()
+            print("clicked")
+        end,
+    },
+})
