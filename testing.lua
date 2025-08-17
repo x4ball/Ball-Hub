@@ -24,9 +24,8 @@ local Section = Window:Section({
     Icon = "bird",
     Opened = true,
 
-local Tab = Window:Tab({
+local Tab = Window:Tab
     Title = "Tab Title",
     Icon = "bird",
     Locked = false,
-})
 })
