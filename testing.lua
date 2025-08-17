@@ -1,62 +1,51 @@
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
 
 local Window = WindUI:CreateWindow({
-    Title = "My Super Hub ",
-    Icon = "door-open",
-    Author = "by .ftgs and .ftgs",
-    Folder = "MySuperHub",
-    
-    -- ↓ This all is Optional. You can remove it.
-    Size = UDim2.fromOffset(580, 460),
-    Transparent = true,
+    Title = "My Hub",
+    Author = "ftgs",
     Theme = "Dark",
-    Resizable = true,
-    SideBarWidth = 200,
-    BackgroundImageTransparency = 0.42,
-    HideSearchBar = true,
-    ScrollBarEnabled = false,
-    
-    -- ↓ Optional. You can remove it.
-    --[[ You can set 'rbxassetid://' or video to Background.
-        'rbxassetid://':
-            Background = "rbxassetid://", -- rbxassetid
-        Video:
-            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
-    --]]
-    
-    -- ↓ Optional. You can remove it.
-    User = {
-        Enabled = true,
-        Anonymous = true,
-        Callback = function()
-            print("clicked")
-        end,
-    },
-    
-    -- !  ↓  remove this all, 
-    -- !  ↓  if you DON'T need the key system
-    KeySystem = { 
-        -- ↓ Optional. You can remove it.
-        Key = { "1234", "5678" },
-        
-        Note = "Example Key System.",
-        
-        -- ↓ Optional. You can remove it.
-        Thumbnail = {
-            Image = "rbxassetid://",
-            Title = "Thumbnail",
-        },
-        
-        -- ↓ Optional. You can remove it.
-        URL = "YOUR LINK TO GET KEY (Discord, Linkvertise, Pastebin, etc.)",
-        
-        -- ↓ Optional. You can remove it.
-        SaveKey = false, -- automatically save and load the key.
-        
-        -- ↓ Optional. You can remove it.
-        -- API = {} ← Services. Read about it below ↓
-    },
+    Size = UDim2.fromOffset(600, 500),
+    SideBarWidth = 180,
 })
 
---                        ↓ Special name     ↓ Icon     ↓ Callback                         ↓ Order
-Window:CreateTopbarButton("MyCustomButton1", "bird",    function() print("clicked!") end,  990)
+Window:EditOpenButton({
+    Title = "Open Hub",
+    Draggable = true,
+    Color = ColorSequence.new(Color3.fromHex("4A00E0"), Color3.fromHex("8E2DE2"))
+})
+
+-- 🔹 Section 1: Movement
+local Movement = Window:Section({
+    Title = "Movement",
+    Icon = "run",
+    Opened = true
+})
+
+Movement:Button({
+    Title = "Speed 32",
+    Callback = function()
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 32
+    end
+})
+
+Movement:Toggle({
+    Title = "Infinite Jump",
+    Callback = function(state)
+        if state then
+            -- aktifkan
+        end
+    end
+})
+
+-- 🔹 Section 2: Teleport
+local Teleport = Window:Section({
+    Title = "Teleport",
+    Icon = "map-marker"
+})
+
+Teleport:Button({
+    Title = "To Spawn",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 5, 0)
+    end
+})
