@@ -278,6 +278,7 @@ TrucWindUI:Notify({
         })
     end
 })
+
 local JobSection = Job:Section({
     Title = "Get A Job"
 })
