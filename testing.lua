@@ -248,13 +248,14 @@ DealerSection:Dropdown({
 })
 
 -- 🔹 JOB APPLICATION TAB
-local JobTeleport = Job:Tab({
+local Job1 = Window:Tab({
     Title = "Job Application",
-    Icon = "job",
+    Icon = "bird",
+    Locked = false,
 })
 
-local JobTeleport = Job:Section({
-    Title = "Job Place in Jakarta"
+local JobTeleport = JobTab:Section({ 
+    Title = "Teleport to job"
 })
 
 JobTeleport:Button({
@@ -279,7 +280,7 @@ TrucWindUI:Notify({
     end
 })
 
-local JobSection = Job:Section({
+local JobSection = AJobTab:Section({
     Title = "Get A Job"
 })
 
