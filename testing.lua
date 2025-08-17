@@ -41,42 +41,32 @@ local Places = {
 }
 
 local Dropdown = Tab:Dropdown({
-    Title = "Dropdown (Multi)",
+    Title = "Pilih Tempat",
     Values = { "Category A", "Category B", "Category C" },
-    Value = { "Category A" },
-    Multi = false,
-    AllowNone = true,
+    Value = "Category A",
     Callback = function(option)
-        -- option bisa table (multi) atau string (kalau Multi = false)
-        if typeof(option) == "table" then
-            for _, name in ipairs(option) do
-                local pos = Places[name]
-                if pos then
-                    -- Teleport
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+        local pos = Places[option]
+        if pos then
+            -- notif sebelum teleport
+            WindUI:Notify({
+                Title = "Teleport",
+                Content = "Teleporting ke " .. option .. "...",
+                Duration = 2,
+                Icon = "loader",
+            })
 
-                    -- Notif
-                    WindUI:Notify({
-                        Title = "Teleport",
-                        Content = "Sukses Teleport ke " .. name,
-                        Duration = 3,
-                        Icon = "check",
-                    })
+            task.wait(1)
 
-                    task.wait(1) -- biar ada jeda kalau pilih lebih dari 1
-                end
-            end
-        else
-            local pos = Places[option]
-            if pos then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-                WindUI:Notify({
-                    Title = "Teleport",
-                    Content = "Sukses Teleport ke " .. option,
-                    Duration = 3,
-                    Icon = "check",
-                })
-            end
+            -- teleport
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+
+            -- notif sukses sesuai lokasi
+            WindUI:Notify({
+                Title = "Teleport",
+                Content = "Sukses ke " .. option .. " ✓",
+                Duration = 3,
+                Icon = "check",
+            })
         end
     end
 })
