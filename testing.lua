@@ -28,12 +28,18 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
+-- Bikin label judul dulu
+Tab:Label({
+    Title = "Menu Teleport",
+    Desc = "Pilih lokasi untuk teleport",
+})
+
+-- Baru bikin button di bawahnya
 local Button = Tab:Button({
     Title = "Teleport ke Tempat A",
     Desc = "Klik untuk teleport",
     Locked = false,
     Callback = function()
-        -- Notif sebelum teleport
         WindUI:Notify({
             Title = "Teleport",
             Content = "Teleporting...",
@@ -41,12 +47,10 @@ local Button = Tab:Button({
             Icon = "loader",
         })
 
-        task.wait(1) -- jeda biar notif kebaca
+        task.wait(1)
 
-        -- Teleport
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2827.50488, 29, 100)
 
-        -- Notif setelah teleport
         WindUI:Notify({
             Title = "Teleport",
             Content = "Sukses Teleport!",
