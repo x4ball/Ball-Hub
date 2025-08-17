@@ -28,15 +28,15 @@ local Tab = Window:Tab({
     Locked = false,
 })
 
-local Button = Tab:Button({
-    Title = "Button",
-    Desc = "Test Button",
-    Locked = false,
-    Callback = function(Notify)
-     WindUI:Notify({
-    Title = "Notification Title",
-    Content = "Notification Content example!",
-    Duration = 3, -- 3 seconds
-    Icon = "bird",
+Main:Button({
+    Title = "Click Me!",
+    Callback = function()
+        -- Di sinilah kamu taruh Notify
+        WindUI:Notify({
+            Title = "Sukses!",
+            Content = "Fitur berhasil dijalankan!",
+            Duration = 3, -- 3 detik
+            Icon = "check", -- bisa: "bird", "cog", "warning", dll
+        })
     end
 })
