@@ -32,17 +32,10 @@ local Tb = Wtab:Tab({
 local Paragraph = Tb:Paragraph({
     Title = "Changelog V1.1",
     Desc = "-Added new tab for teleport to job and dealership",
-    Color = "Red",
+    Color = "Grey",
     Image = "",
     ImageSize = 30,
     Thumbnail = "https://i.ibb.co.com/ksfKwM1W/images-2.jpg",
     ThumbnailSize = 80,
     Locked = false,
-    Buttons = {
-        {
-            Icon = "bird",
-            Title = "Button",
-            Callback = function() print("1 Button") end,
-        }
-    }
 })
