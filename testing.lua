@@ -68,7 +68,7 @@ mtb1:Dropdown({
                 Icon = "loader",
             })
             task.wait(1)
-            Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+            Player.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
             WindUI:Notify({
                 Title = "Sukses ✅",
                 Content = "Berhasil teleport ke " .. option,
