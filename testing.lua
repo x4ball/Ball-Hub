@@ -1,10 +1,11 @@
-local wUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-local Wtab = wUI:CreateWindow({
-    Title = "Cdid Script | B2s Hub",
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "My Super Hub ",
     Icon = "door-open",
-    Author = "Example UI",
-    Folder = "MyTestHub",
+    Author = "by .ftgs and .ftgs",
+    Folder = "MySuperHub",
     
+    -- ↓ This all is Optional. You can remove it.
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
     Theme = "Dark",
@@ -13,58 +14,42 @@ local Wtab = wUI:CreateWindow({
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
+    
+    User = {
+        Enabled = true,
+        Anonymous = true,
+        Callback = function()
+            print("clicked")
+        end,
+    },
 })
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-
--- ambil thumbnail avatar
-local thumbType = Enum.ThumbnailType.HeadShot
-local thumbSize = Enum.ThumbnailSize.Size100x100
-local content, isReady = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
-
--- bikin tab kosong khusus profile
-local Profile = Wtab:CreateTab({
-    Name = player.DisplayName,
-    Icon = "user", -- biar ada icon default
+Window:Tag({
+    Title = "v1.6.4",
+    Color = Color3.fromHex("#30ff6a")
 })
-
--- isi dengan avatar + username
-Profile:CreateParagraph({
-    Title = player.DisplayName,
-    Desc = "@" .. player.Name,
-    Image = content
+Window:Tag({
+    Title = "Beta Version",
+    Color = Color3.fromHex("#30ff6a")
 })
-local Stab = Wtab:Section({
+local HomeSection = Window:Section({
     Title = "Main",
-    Icon = "House",
-    Opened = true,
+    Icon = "",
+    Opened = false,
 })
-local Tb = Wtab:Tab({
-    Title = "About",
-    Icon = "Annouchment",
-    Locked = false,
-})
-local Tb = Wtab:Tab({
+local HomeTab = HomeSection:Tab({
     Title = "Changelog",
-    Icon = "bird",
+    Icon = "info",
     Locked = false,
 })
-local Pgph = Tb:Paragraph({
-    Title = "Changelog V1.1",
-    Desc = [[- Added new tab for teleport to job - Added dealership feature]],
-    Color = "Grey",
-    Image = "refresh-cw", -
-    ImageSize = 30,
-    Thumbnail = "https://i.ibb.co.com/r2Lx8rtw/images-2.jpg", -- gambar dari link
-    ThumbnailSize = 80,
+local AboutPara = HomeTab:Paragraph({
+    Title = "Changelog",
+    Desc = "-",
+    Thumbnail = "",
+    ThumbnailSize = 80, 
     Locked = false,
-    Buttons = {
-        {
-            Icon = "check",
-            Title = "Oke",
-            Callback = function()
-                print("Button clicked!")
-            end,
-        }
-    }
+})
+local HomeTab = HomeSection:Tab({
+    Title = "information",
+    Icon = "info",
+    Locked = false,
 })
