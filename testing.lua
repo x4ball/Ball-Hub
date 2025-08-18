@@ -37,22 +37,20 @@ local UserId = Player.UserId
 -- Ambil data avatar menggunakan HTTP
 local HttpService = game:GetService("HttpService")
 local Success, Result = pcall(function()
-    return HttpService:JSONDecode(game:HttpGet("https://avatar.roblox.com/v1/users/" .. UserId .. "/avatar"))
+    return HttpService:JSONDecode(
+        game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. UserId .. "&size=150x150&format=Png&isCircular=false")
+    )
 end)
 
-if Success and Result.succeeded then
-    -- Ambil URL thumbnail avatar
-    local ThumbnailUrl = Result.assets[1] and Result.assets[1].thumbnailImageUrl or ""
+if Success and Result and Result.data and Result.data[1] and Result.data[1].imageUrl then
+    local ThumbnailUrl = Result.data[1].imageUrl
 
-    -- Gunakan di Wind UI
     mtb:Paragraph({
         Title = "Welcome, " .. Player.Name .. "!",
         Desc = "You're using the latest version of the script.",
         Color = "Cyan",
-        Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. UserId .. "&width=48&height=48",
-        ImageSize = 30,
-        Thumbnail = ThumbnailUrl, -- Bisa juga pakai headshot jika gagal
-        ThumbnailSize = 80,
+        Image = ThumbnailUrl,
+        ImageSize = 80,
         Locked = false,
         Buttons = {
             {
@@ -68,10 +66,16 @@ if Success and Result.succeeded then
 else
     warn("Gagal ambil data avatar:", Result)
     -- Fallback ke headshot
-    local FallbackUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. UserId .. "&width=420&height=420"
-    -- Tampilkan tanpa avatar detail
+    local FallbackUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. UserId .. "&width=150&height=150"
+    mtb:Paragraph({
+        Title = "Welcome, " .. Player.Name .. "!",
+        Desc = "You're using the latest version of the script.",
+        Color = "Cyan",
+        Image = FallbackUrl,
+        ImageSize = 80,
+    })
 end
-})
+
 local sts1 = wdw:Section({
     Title = "Teleport",
     Opened = true,
@@ -98,7 +102,7 @@ local Places = {
 mtb1:Dropdown({
     Title = "Pilih Dealer",
     Values = {"Dealer Mitsubishi JKT", "Dealer Mercedez Benz JKT", "Dealer Toyota JKT", "Dealer Bmw JKT", "Dealer Lexus JKT", "Dealer Hyundai JKT", "Dealer Audi JKT", "Dealer Vw JKT"},
-    Value = "Dealer Mitshubisi JKT",
+    Value = "Dealer Mitsubishi JKT",
     Callback = function(option)
         local pos = Places[option]
         if pos then
@@ -109,7 +113,7 @@ mtb1:Dropdown({
                 Icon = "loader",
             })
             task.wait(1)
-            player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+            Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
             WindUI:Notify({
                 Title = "Sukses ✅",
                 Content = "Berhasil teleport ke " .. option,
@@ -143,7 +147,7 @@ local Places = {
 mtb1:Dropdown({
     Title = "Pilih Dealer",
     Values = {"Dealer Mitsubishi JKT", "Dealer Mercedez Benz JKT", "Dealer Toyota JKT", "Dealer Bmw JKT", "Dealer Lexus JKT", "Dealer Hyundai JKT", "Dealer Audi JKT", "Dealer Vw JKT"},
-    Value = "Dealer Mitshubisi JKT",
+    Value = "Dealer Mitsubishi JKT",
     Callback = function(option)
         local pos = Places[option]
         if pos then
