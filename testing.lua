@@ -26,7 +26,7 @@ local Window = WindUI:CreateWindow({
     -- ↓ Optional. You can remove it.
     User = {
         Enabled = true,
-        Anonymous = true,
+        Anonymous = false,
         Callback = function()
             print("clicked")
         end,
