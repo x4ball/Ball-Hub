@@ -1,177 +1,85 @@
-local wi = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-local wdw = wi:CreateWindow({
-    Title = "My Super script | Test Hub",
+local ui = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local wnd = ui:CreateWindow({
+    Title = "My Super Hub ",
     Icon = "door-open",
-    Author = "Example UI",
-    Folder = "MyTestHub",
-    Theme = "Purple",
-})
-wdw:Tag({
-    Title = "Free",
-    Color = Color3.fromHex("#30ff6a")
-})
-wdw:Tag({
-    Title = "Beta",
-    Color = Color3.fromHex("#ffff4d")
-})
-local sts = wdw:Section({
-    Title = "Main",
-    Opened = true,
-})
-local mtb = sts:Tab({
-    Title = "home",
-    Icon = "home",
-    Locked = false,
-})
-local cgg = mtb:Section({
-    Title = "Changelog v1.6.4"
-})
-local mpgh = cgg:Paragraph({
-    Title = "Perubahan",
-    Desc = "- Fix bug teleport\n- Tambah Dealer Toyota\n- UI Home Profile baru",
-    Color = "Green",
-})
-local Player = game:GetService("Players").LocalPlayer
-local UserId = Player.UserId
+    Author = "by .ftgs and .ftgs",
+    Folder = "MySuperHub",
 
--- Ambil data avatar menggunakan HTTP
-local HttpService = game:GetService("HttpService")
-local Success, Result = pcall(function()
-    return HttpService:JSONDecode(
-        game:HttpGet("https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. UserId .. "&size=150x150&format=Png&isCircular=false")
-    )
-end)
+    Size = UDim2.fromOffset(580, 460),
+    Transparent = true,
+    Theme = "Dark",
+    Resizable = true,
+    SideBarWidth = 200,
+    BackgroundImageTransparency = 0.42,
+    HideSearchBar = true,
+    ScrollBarEnabled = false,
+     
+     User = {
+        Enabled = true,
+        Anonymous = false,
+        Callback = function()
+            print("clicked")
+        end,
+})
+wnd:Tag({
+    Title = "Working",
+    Color = Color3.fromHex("#05f545")
+})
+wnd:Tag({
+    Title = "Beta Version",
+    Color = Color3.fromHex("#edea34")
+})
+-- home tab
+local Hometab = wnd:Tab({
+    Title = "Home",
+    Icon = "house",
+})
 
-if Success and Result and Result.data and Result.data[1] and Result.data[1].imageUrl then
-    local ThumbnailUrl = Result.data[1].imageUrl
+-- ambil service
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
-    mtb:Paragraph({
-        Title = "Welcome, " .. Player.Name .. "!",
-        Desc = "You're using the latest version of the script.",
-        Color = "Cyan",
-        Image = ThumbnailUrl,
-        ImageSize = 80,
-        Locked = false,
-        Buttons = {
-            {
-                Icon = "user",
-                Title = "Profile",
-                Callback = function()
-                    setclipboard("https://www.roblox.com/users/" .. UserId .. "/profile")
-                    print("Profile link copied!")
-                end
-            }
-        }
-    })
-else
-    warn("Gagal ambil data avatar:", Result)
-    -- Fallback ke headshot
-    local FallbackUrl = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. UserId .. "&width=150&height=150"
-    mtb:Paragraph({
-        Title = "Welcome, " .. Player.Name .. "!",
-        Desc = "You're using the latest version of the script.",
-        Color = "Cyan",
-        Image = FallbackUrl,
-        ImageSize = 80,
-    })
+-- ambil uang (leaderstats)
+local money = 0
+if LocalPlayer:FindFirstChild("leaderstats") and LocalPlayer.leaderstats:FindFirstChild("Money") then
+    money = LocalPlayer.leaderstats.Money.Value
 end
 
-local sts1 = wdw:Section({
-    Title = "Teleport",
-    Opened = true,
-})
-local mtb1 = sts1:Tab({
-    Title = "Dealership",
-    Icon = "car",
+-- status premium/free
+local status = (money >= 1000) and "Premium" or "Free"
+
+-- changelog text
+local changelog = [[
+📜 Changelog:
+- v1.0 : Rilis awal
+- v1.1 : Fix bug UI
+- v1.2 : Tambah fitur auto farm
+]]
+
+-- ambil avatar player
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size100x100
+local content, isReady = Players:GetUserThumbnailAsync(LocalPlayer.UserId, thumbType, thumbSize)
+
+-- paragraph di tab home
+local InfoParagraph = Hometab:Paragraph({
+    Title = "Script Info",
+    Desc = "👤 Player: " .. LocalPlayer.Name ..
+           "\n💸 Money: " .. money ..
+           "\n⭐ Status: " .. status ..
+           "\n\n" .. changelog,
+    Color = "Blue",
     Locked = false,
+    Thumbnail = content,
+    ThumbnailSize = 80,
 })
-mtb1:Section({
-    Title = "Dealership Jakarta"
+-- player tab
+local Playertab = wnd:Tab({
+    Title = "Player",
+    Icon = "human",
 })
-local Places = {
-    ["Dealer Mercedez Benz JKT"] = Vector3.new(315.027832, 23.4426422, -1674.36316),
-    ["Dealer Mitsubishi JKT"] = Vector3.new(739.678223, 24.5365658, -2117.28955),
-    ["Dealer Hyundai JKT"] = Vector3.new(941.509766, 22.1062279, 10773.6934),
-    ["Dealer Toyota JKT"] = Vector3.new(533.399658, 25.3010502, -1966.38733),
-    ["Dealer Audi JKT"] = Vector3.new(1786.8241, 46.2610168, 1457.70154),
-    ["Dealer Lexus JKT"] = Vector3.new(526.806091, 25.3010406, -1954.80811),
-    ["Dealer Bmw JKT"] = Vector3.new(1573.52417, 27.9048462, -3955.22729),
-    ["Dealer VW JKT"] = Vector3.new(1801.60413, 46.2610168, 1466.19629),
-}
-
-mtb1:Dropdown({
-    Title = "Pilih Dealer",
-    Values = {"Dealer Mitsubishi JKT", "Dealer Mercedez Benz JKT", "Dealer Toyota JKT", "Dealer Bmw JKT", "Dealer Lexus JKT", "Dealer Hyundai JKT", "Dealer Audi JKT", "Dealer Vw JKT"},
-    Value = "Dealer Mitsubishi JKT",
-    Callback = function(option)
-        local pos = Places[option]
-        if pos then
-            WindUI:Notify({
-                Title = "Teleport",
-                Content = "Teleporting ke " .. option .. "...",
-                Duration = 2,
-                Icon = "loader",
-            })
-            task.wait(1)
-            Player.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-            WindUI:Notify({
-                Title = "Sukses ✅",
-                Content = "Berhasil teleport ke " .. option,
-                Duration = 3,
-                Icon = "check",
-            })
-        else
-            WindUI:Notify({
-                Title = "Gagal ❌",
-                Content = "Lokasi dealer nggak ditemukan",
-                Duration = 3,
-                Icon = "x",
-            })
-        end
-    end
-})
-mtb1:Section({
-    Title = "Dealership Jawa Barat"
-})
-local Places = {
-    ["Dealer Mercedez Benz JKT"] = Vector3.new(315.027832, 23.4426422, -1674.36316),
-    ["Dealer Mitsubishi JKT"] = Vector3.new(739.678223, 24.5365658, -2117.28955),
-    ["Dealer Hyundai JKT"] = Vector3.new(941.509766, 22.1062279, 10773.6934),
-    ["Dealer Toyota JKT"] = Vector3.new(533.399658, 25.3010502, -1966.38733),
-    ["Dealer Audi JKT"] = Vector3.new(1786.8241, 46.2610168, 1457.70154),
-    ["Dealer Lexus JKT"] = Vector3.new(526.806091, 25.3010406, -1954.80811),
-    ["Dealer Bmw JKT"] = Vector3.new(1573.52417, 27.9048462, -3955.22729),
-    ["Dealer VW JKT"] = Vector3.new(1801.60413, 46.2610168, 1466.19629),
-}
-
-mtb1:Dropdown({
-    Title = "Pilih Dealer",
-    Values = {"Dealer Mitsubishi JKT", "Dealer Mercedez Benz JKT", "Dealer Toyota JKT", "Dealer Bmw JKT", "Dealer Lexus JKT", "Dealer Hyundai JKT", "Dealer Audi JKT", "Dealer Vw JKT"},
-    Value = "Dealer Mitsubishi JKT",
-    Callback = function(option)
-        local pos = Places[option]
-        if pos then
-            WindUI:Notify({
-                Title = "Teleport",
-                Content = "Teleporting ke " .. option .. "...",
-                Duration = 2,
-                Icon = "loader",
-            })
-            task.wait(1)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
-            WindUI:Notify({
-                Title = "Sukses ✅",
-                Content = "Berhasil teleport ke " .. option,
-                Duration = 3,
-                Icon = "check",
-            })
-        else
-            WindUI:Notify({
-                Title = "Gagal ❌",
-                Content = "Lokasi dealer nggak ditemukan",
-                Duration = 3,
-                Icon = "x",
-            })
-        end
-    end
+-- Auto Tab
+local Autotab = wnd:Tab({
+    Title = "Player",
+    Icon = "human",
 })
