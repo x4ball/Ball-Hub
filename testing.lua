@@ -49,7 +49,7 @@ local Tb = Wtab:Tab({
     Icon = "bird",
     Locked = false,
 })
-local Paragraph = Tab:Paragraph({
+local Pgph = Tb:Paragraph({
     Title = "Changelog V1.1",
     Desc = [[- Added new tab for teleport to job - Added dealership feature]],
     Color = "Grey",
