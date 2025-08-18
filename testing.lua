@@ -1,10 +1,11 @@
-local ui = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
-local wnd = ui:CreateWindow({
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
     Title = "My Super Hub ",
     Icon = "door-open",
     Author = "by .ftgs and .ftgs",
     Folder = "MySuperHub",
-
+    
+    -- ↓ This all is Optional. You can remove it.
     Size = UDim2.fromOffset(580, 460),
     Transparent = true,
     Theme = "Dark",
@@ -13,73 +14,50 @@ local wnd = ui:CreateWindow({
     BackgroundImageTransparency = 0.42,
     HideSearchBar = true,
     ScrollBarEnabled = false,
-     
-     User = {
+    
+    -- ↓ Optional. You can remove it.
+    --[[ You can set 'rbxassetid://' or video to Background.
+        'rbxassetid://':
+            Background = "rbxassetid://", -- rbxassetid
+        Video:
+            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
+    --]]
+    
+    -- ↓ Optional. You can remove it.
+    User = {
         Enabled = true,
-        Anonymous = false,
+        Anonymous = true,
         Callback = function()
             print("clicked")
         end,
+    },
+    
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "1234", "5678" },
+        
+        Note = "Example Key System.",
+        
+        -- ↓ Optional. You can remove it.
+        Thumbnail = {
+            Image = "rbxassetid://",
+            Title = "Thumbnail",
+        },
+        
+        -- ↓ Optional. You can remove it.
+        URL = "YOUR LINK TO GET KEY (Discord, Linkvertise, Pastebin, etc.)",
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
 })
-wnd:Tag({
-    Title = "Working",
-    Color = Color3.fromHex("#05f545")
-})
-wnd:Tag({
-    Title = "Beta Version",
-    Color = Color3.fromHex("#edea34")
-})
--- home tab
-local Hometab = wnd:Tab({
-    Title = "Home",
-    Icon = "house",
-})
-
--- ambil service
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- ambil uang (leaderstats)
-local money = 0
-if LocalPlayer:FindFirstChild("leaderstats") and LocalPlayer.leaderstats:FindFirstChild("Money") then
-    money = LocalPlayer.leaderstats.Money.Value
-end
-
--- status premium/free
-local status = (money >= 1000) and "Premium" or "Free"
-
--- changelog text
-local changelog = [[
-📜 Changelog:
-- v1.0 : Rilis awal
-- v1.1 : Fix bug UI
-- v1.2 : Tambah fitur auto farm
-]]
-
--- ambil avatar player
-local thumbType = Enum.ThumbnailType.HeadShot
-local thumbSize = Enum.ThumbnailSize.Size100x100
-local content, isReady = Players:GetUserThumbnailAsync(LocalPlayer.UserId, thumbType, thumbSize)
-
--- paragraph di tab home
-local InfoParagraph = Hometab:Paragraph({
-    Title = "Script Info",
-    Desc = "👤 Player: " .. LocalPlayer.Name ..
-           "\n💸 Money: " .. money ..
-           "\n⭐ Status: " .. status ..
-           "\n\n" .. changelog,
-    Color = "Blue",
+local Tab = Window:Tab({
+    Title = "Tab Title",
+    Icon = "bird",
     Locked = false,
-    Thumbnail = content,
-    ThumbnailSize = 80,
-})
--- player tab
-local Playertab = wnd:Tab({
-    Title = "Player",
-    Icon = "human",
-})
--- Auto Tab
-local Autotab = wnd:Tab({
-    Title = "Player",
-    Icon = "human",
 })
