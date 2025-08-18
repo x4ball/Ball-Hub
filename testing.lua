@@ -14,6 +14,26 @@ local Wtab = wUI:CreateWindow({
     HideSearchBar = true,
     ScrollBarEnabled = false,
 })
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- ambil thumbnail avatar
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size100x100
+local content, isReady = Players:GetUserThumbnailAsync(player.UserId, thumbType, thumbSize)
+
+-- bikin tab kosong khusus profile
+local Profile = Wtab:CreateTab({
+    Name = player.DisplayName,
+    Icon = "user", -- biar ada icon default
+})
+
+-- isi dengan avatar + username
+Profile:CreateParagraph({
+    Title = player.DisplayName,
+    Desc = "@" .. player.Name,
+    Image = content
+})
 local Stab = Wtab:Section({
     Title = "Main",
     Icon = "House",
@@ -29,13 +49,22 @@ local Tb = Wtab:Tab({
     Icon = "bird",
     Locked = false,
 })
-local Pgh = Tb:Paragraph({
+local Paragraph = Tab:Paragraph({
     Title = "Changelog V1.1",
-    Desc = "-Added new tab for teleport to job and dealership",
+    Desc = [[- Added new tab for teleport to job - Added dealership feature]],
     Color = "Grey",
-    Image = "",
+    Image = "refresh-cw", -
     ImageSize = 30,
-    Thumbnail = "https://i.ibb.co.com/ksfKwM1W/images-2.jpg",
-    ThumbnailSize = 128,
+    Thumbnail = "https://i.ibb.co.com/r2Lx8rtw/images-2.jpg", -- gambar dari link
+    ThumbnailSize = 80,
     Locked = false,
+    Buttons = {
+        {
+            Icon = "check",
+            Title = "Oke",
+            Callback = function()
+                print("Button clicked!")
+            end,
+        }
+    }
 })
