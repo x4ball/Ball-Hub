@@ -29,13 +29,13 @@ local Tb = Wtab:Tab({
     Icon = "bird",
     Locked = false,
 })
-local Paragraph = Tb:Paragraph({
+local Pgh = Tb:Paragraph({
     Title = "Changelog V1.1",
     Desc = "-Added new tab for teleport to job and dealership",
     Color = "Grey",
     Image = "",
     ImageSize = 30,
     Thumbnail = "https://i.ibb.co.com/ksfKwM1W/images-2.jpg",
-    ThumbnailSize = 80,
+    ThumbnailSize = 128,
     Locked = false,
 })
